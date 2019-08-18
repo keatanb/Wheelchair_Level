@@ -1,0 +1,31 @@
+## Interface: 11302
+## Title: Wheelchair |cff9966ff[Level]
+## Author: Keatan Bauer
+## Version: 1.13.2
+## Notes: Shows mobs, quests, dungeons and battles needed until you reach your next level.
+## URL: http://github.com
+## OptionalDeps: LibStub,CallbackHandler-1.0,AceTimer-3.0,AceConfig-3.0,AceGUI-3.0,AceDB-3.0,AceDBOptions-3.0
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: WheelchairLevelDB
+## SavedVariablesPerCharacter: sConfig,sData
+
+
+embeds.xml
+
+locale\locale.xml
+
+Main.lua
+Tables.lua
+Libs.lua
+Config.lua
+
+objects\Messages.lua
+objects\LDB.lua
+objects\Tooltip.lua
+objects\Average.lua
+objects\Player.lua
+
+frames\GlobalTemplates.xml
+frames\AverageFrame_Classic.xml
+frames\AverageFrame_Blocky.xml
