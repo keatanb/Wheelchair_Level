@@ -524,7 +524,7 @@ function WheelchairLevel.Player:DungeonStart()
         WheelchairLevel.db.char.data.dungeonList[1].startTime = time()
         local hours, mins = GetGameTime();
         local dateInfo = C_Calendar.GetDate();
-        WheelchairLevel.db.char.data.dungeonList[1].timeStamp = dateInfo.monthDay .."-"..dateInfo.month.."-"..dateInfo.year.." "..("%dh"):format(hours)..":"..("%dm"):format(mins)
+        WheelchairLevel.db.char.data.dungeonList[1].timeStamp = string.format("%02d",dateInfo.monthDay) .."-"..string.format("%02d",dateInfo.month).."-"..dateInfo.year.." "..string.format("%02d",hours)..":"..string.format("%02d",mins)
         console:log("Dungeon Started! (" .. tostring(WheelchairLevel.db.char.data.dungeonList[1].name) .. ")")
         return true
     else
@@ -1348,6 +1348,31 @@ function WheelchairLevel.Player:GetResetsInLastHour()
         return 0, oldestStart
     end
     return resetCount, oldestStart
+end
+
+--get the best dungeon based on xpPerHour within the last 5 levels
+function WheelchairLevel.Player:GetBestDungeon()
+    if #WheelchairLevel.db.char.data.dungeonList > 0 then
+        local bestDungeon
+        local bestXpPerHour = 0
+
+        for index, value in ipairs(WheelchairLevel.db.char.data.dungeonList) do
+            if value.level == nil then
+                WheelchairLevel.db.char.data.dungeonList[index].level = self.level
+                value.level = self.level
+            end
+            if self.level - value.level < 5 and value.totalXP > 0 and not value.inProgress then
+                local xpPerHour = value.totalXP / ((value.endTime - value.startTime) / 3600)
+                if xpPerHour > bestXpPerHour then
+                    bestDungeon = value
+                    bestXpPerHour = xpPerHour
+                end
+            end
+        end
+        return bestDungeon, bestXpPerHour
+    else
+        return nil, nil
+    end
 end
 
 ---

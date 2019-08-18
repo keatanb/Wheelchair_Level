@@ -579,10 +579,94 @@ function WheelchairLevel.Tooltip:AddDungeons()
             )
         end
 
+        local bestDungeon, bestXpPerHour = WheelchairLevel.Player:GetBestDungeon()
+        if bestDungeon then
+            GameTooltip:AddLine(" ")
+            GameTooltip:AddLine("Best Dungeon:")
+            GameTooltip:AddDoubleLine(
+                    " " .. L["Name"] .. ": ",
+                    bestDungeon.name,
+                    self.labelColor.r,
+                    self.labelColor.g,
+                    self.labelColor.b,
+                    self.dataColor.r,
+                    self.dataColor.b,
+                    self.dataColor.b
+            )
+            GameTooltip:AddDoubleLine(
+                    " Date: ",
+                    bestDungeon.timeStamp,
+                    self.labelColor.r,
+                    self.labelColor.g,
+                    self.labelColor.b,
+                    self.dataColor.r,
+                    self.dataColor.b,
+                    self.dataColor.b
+            )
+            local bestDuration = bestDungeon.endTime - bestDungeon.startTime
+            GameTooltip:AddDoubleLine(
+                    " Duration: ",
+                    WheelchairLevel.Lib:TimeFormat(bestDuration),
+                    self.labelColor.r,
+                    self.labelColor.g,
+                    self.labelColor.b,
+                    self.dataColor.r,
+                    self.dataColor.b,
+                    self.dataColor.b
+            )
+            GameTooltip:AddDoubleLine(
+                    " XPh: ",
+                    WheelchairLevel.Lib:NumberFormat(bestXpPerHour),
+                    self.labelColor.r,
+                    self.labelColor.g,
+                    self.labelColor.b,
+                    self.dataColor.r,
+                    self.dataColor.b,
+                    self.dataColor.b
+            )
+            GameTooltip:AddDoubleLine(
+                    " " .. L["Kills"] .. ": ",
+                    WheelchairLevel.Lib:NumberFormat(bestDungeon.killCount) ..
+                            " @ " .. WheelchairLevel.Lib:NumberFormat(bestDungeon.killTotal / bestDungeon.killCount) .. " xp",
+                    self.labelColor.r,
+                    self.labelColor.g,
+                    self.labelColor.b,
+                    self.dataColor.r,
+                    self.dataColor.b,
+                    self.dataColor.b
+            )
+
+            if bestDungeon.rested > 0 then
+                local bestTotal = bestDungeon.totalXP + bestDungeon.rested
+                GameTooltip:AddDoubleLine(
+                        " " .. L["Total XP"] .. ": ",
+                        WheelchairLevel.Lib:NumberFormat(bestTotal) ..
+                                " (" .. WheelchairLevel.Lib:NumberFormat(bestDungeon.rested) .. " " .. L["XP Rested"] .. ")",
+                        self.labelColor.r,
+                        self.labelColor.g,
+                        self.labelColor.b,
+                        self.dataColor.r,
+                        self.dataColor.b,
+                        self.dataColor.b
+                )
+            else
+                GameTooltip:AddDoubleLine(
+                        " " .. L["Total XP"] .. ": ",
+                        WheelchairLevel.Lib:NumberFormat(bestDungeon.totalXP),
+                        self.labelColor.r,
+                        self.labelColor.g,
+                        self.labelColor.b,
+                        self.dataColor.r,
+                        self.dataColor.b,
+                        self.dataColor.b
+                )
+            end
+        end
+
         local countDungeonsInLastHour, oldestTimeInLastHour = WheelchairLevel.Player:GetResetsInLastHour()
         if countDungeonsInLastHour > 0 then
             GameTooltip:AddLine(" ")
-            GameTooltip:AddLine("Resets: ")
+            GameTooltip:AddLine("Instances Entered: ")
             GameTooltip:AddDoubleLine(
                     " Last Hour: ",
                     countDungeonsInLastHour,
@@ -756,102 +840,6 @@ function WheelchairLevel.Tooltip:AddBattlegroundInfo()
         self.dataColor.b,
         self.dataColor.b
     )
-end
-
----
--- function description
-function WheelchairLevel.Tooltip:AddBattles()
-    local bgs = WheelchairLevel.Player:GetBattlegroundsListed()
-    if bgs ~= nil and (#WheelchairLevel.db.char.data.bgList) > 0 then
-        local latestData, averageRaw, averageFormatted, needed
-        latestData = WheelchairLevel.Player:GetLatestBattlegroundDetails()
-
-        GameTooltip:AddLine(L["Battlegrounds Required"] .. ":")
-        for name, count in pairs(bgs) do
-            if name == false then
-                name = "Unknown"
-            end
-            averageRaw = WheelchairLevel.Player:GetBattlegroundAverage(name)
-            if averageRaw == 0 then
-                averageRaw = latestData.totalXP
-            end
-            averageFormatted = WheelchairLevel.Lib:NumberFormat(WheelchairLevel.Lib:round(averageRaw, 0))
-            needed = WheelchairLevel.Player:GetQuestsRequired(tonumber(averageRaw))
-            GameTooltip:AddDoubleLine(
-                " " .. name .. ": ",
-                needed .. " @ " .. averageFormatted .. " xp",
-                self.labelColor.r,
-                self.labelColor.g,
-                self.labelColor.b,
-                self.dataColor.r,
-                self.dataColor.b,
-                self.dataColor.b
-            )
-        end
-        GameTooltip:AddLine(" ")
-
-        if latestData ~= nil then
-            if latestData.inProgress then
-                GameTooltip:AddLine(L["Current Battleground"] .. ":")
-            else
-                GameTooltip:AddLine(L["Last Battleground"] .. ":")
-            end
-            if type(latestData.name) ~= "string" then
-                lastData.name = "Unknown"
-            end
-
-            GameTooltip:AddDoubleLine(
-                " " .. L["Name"] .. ": ",
-                latestData.name,
-                self.labelColor.r,
-                self.labelColor.g,
-                self.labelColor.b,
-                self.dataColor.r,
-                self.dataColor.b,
-                self.dataColor.b
-            )
-            GameTooltip:AddDoubleLine(
-                " " .. L["Total XP"] .. ": ",
-                WheelchairLevel.Lib:NumberFormat(latestData.totalXP),
-                self.labelColor.r,
-                self.labelColor.g,
-                self.labelColor.b,
-                self.dataColor.r,
-                self.dataColor.b,
-                self.dataColor.b
-            )
-            GameTooltip:AddDoubleLine(
-                " " .. L["Objectives"] .. ": ",
-                WheelchairLevel.Lib:NumberFormat(latestData.objCount) ..
-                    " @ " .. WheelchairLevel.Lib:NumberFormat(latestData.xpPerObj) .. " xp",
-                self.labelColor.r,
-                self.labelColor.g,
-                self.labelColor.b,
-                self.dataColor.r,
-                self.dataColor.b,
-                self.dataColor.b
-            )
-            GameTooltip:AddDoubleLine(
-                " " .. L["NPC Kills"] .. ": ",
-                WheelchairLevel.Lib:NumberFormat(latestData.killCount) ..
-                    " @ " .. WheelchairLevel.Lib:NumberFormat(latestData.xpPerKill) .. " xp",
-                self.labelColor.r,
-                self.labelColor.g,
-                self.labelColor.b,
-                self.dataColor.r,
-                self.dataColor.b,
-                self.dataColor.b
-            )
-        end
-        bgs = nil
-        latestData = nil
-        averageRaw = nil
-        averageFormatted = nil
-        needed = nil
-    else
-        GameTooltip:AddLine(L["Battlegrounds Required"] .. ":")
-        GameTooltip:AddLine(" " .. L["No Battles Fought"], self.labelColor.r, self.labelColor.g, self.labelColor.b)
-    end
 end
 
 --- Detailed timer info.

@@ -21,3 +21,4 @@ configured via the configuration panel, which is accessible in the Interface/Add
     /wcl ==> open config panel
     /wcl ed ==> manually trigger end dungeon (may be needed for doing logout instance tele bug resets)
     /wcl sd ==> manually trigger start dungeon (may be needed for doing logout instance tele bug resets)
+

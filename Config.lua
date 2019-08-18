@@ -156,7 +156,7 @@ function WheelchairLevel.Config:GetOptions()
                         order = 5,
                         type = "description",
                         name = "|cFFFFAA00" ..
-                            L["Website"] .. ":|r |cFFFFFFFF" .. "https://github.com/keatanb/WheelchairLevel"
+                            L["Website"] .. ":|r |cFFFFFFFF" .. "https://github.com/keatanb/Wheelchair_Level"
                     }
                 }
             },
@@ -768,28 +768,6 @@ function WheelchairLevel.Config:SetActiveWindow(info, value)
 end
 function WheelchairLevel.Config:GetActiveWindow(info)
     return WheelchairLevel.db.profile.averageDisplay.mode
-end
-
-function WheelchairLevel.Config:SetLdbPattern(info, value)
-    local thestr
-    for i, v in ipairs(WheelchairLevel.LDB_PATTERNS) do
-        if i == value then
-            thestr = v
-        end
-    end
-    if thestr then
-        WheelchairLevel.db.profile.ldb.textPattern = thestr
-
-    else
-        console:log("Could not switch pattern. Pattern not found...")
-    end
-end
-function WheelchairLevel.Config:GetLdbPattern(info)
-    for i, v in ipairs(WheelchairLevel.LDB_PATTERNS) do
-        if WheelchairLevel.db.profile.ldb.textPattern == v then
-            return i
-        end
-    end
 end
 
 function WheelchairLevel.Config:SetTimerEnabled(info, value)
