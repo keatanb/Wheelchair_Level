@@ -12,7 +12,8 @@ _requires Ace3 lib - https://github.com/keatanb/Ace3_
 
 ## Display Options
 - A basic movable frame showing average counts of quest / dungeon / mob kills / time needed to level, based on default amounts until data is collected
-- Tooltips on the frame show detailed average and summary information for each element when individually hovered
+- Tooltips on the frame show more detailed average and historical information for each element when individually hovered
+- Dungeon tooltip contain current dungeon details if in progress, last completed dungeon if not in progress and best historical dungeon run (by xp/h) within 5 character levels
 
 ## Configuration
 configured via the configuration panel, which is accessible in the Interface/AddOns window, or via commands
