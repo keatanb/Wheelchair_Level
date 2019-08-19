@@ -256,10 +256,10 @@ function WheelchairLevel:OnCombatLogEventUnfiltered(...)
     if cl_event ~= nil then
         if cl_event == "UNIT_DIED" then
             local npc_guid = select(8, ...)
-            -- 4.1 backwards compatibility fix.
-            if tonumber(select(4, GetBuildInfo())) < 40200 then
-                npc_guid = select(7, ...)
-            end
+            ---- 4.1 backwards compatibility fix but this shouldnt be needed classic api should be honoring 7+
+            --if tonumber(select(4, GetBuildInfo())) < 40200 then
+            --    npc_guid = select(7, ...)
+            --end
             for i, data in ipairs(targetList) do
                 if data.guid == npc_guid then
                     data.dead = true
@@ -663,7 +663,7 @@ end
 -- SLASH command stuff
 --------------------------------------------------------------------------------
 
---- Callback for the /xtl and /WheelchairLevel slash commands.
+--- Callback for the /wcl slash commands.
 -- Without parametes, it simply opens the configuration dialog.
 -- Various commands may exist for debuggin purposes, but none are essential to
 -- the application.
