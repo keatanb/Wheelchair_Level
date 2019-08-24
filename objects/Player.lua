@@ -542,6 +542,7 @@ end
 function WheelchairLevel.Player:DungeonEnd()
     if WheelchairLevel.db.char.data.dungeonList[1].inProgress == true then
         WheelchairLevel.db.char.data.dungeonList[1].inProgress = false
+        WheelchairLevel.db.char.data.dungeonList[1].endTime = time()
         self:UpdateDungeonName()
         console:log("Dungeon Ended! (" .. tostring(WheelchairLevel.db.char.data.dungeonList[1].name) .. ")")
 

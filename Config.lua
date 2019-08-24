@@ -811,7 +811,7 @@ function WheelchairLevel.Config:GetDefaults()
             averageDisplay = {
                 visible = true,
                 mode = 1,
-                scale = 1.0,
+                scale = 1.5,
                 backdrop = true,
                 verbose = true,
                 colorText = true,
@@ -821,12 +821,7 @@ function WheelchairLevel.Config:GetDefaults()
                 orientation = "v",
                 playerKills = true,
                 playerQuests = true,
-                playerPetBattles = true,
                 playerDungeons = true,
-                playerBGs = true,
-                playerBGOs = false,
-                playerGathering = true,
-                playerDigs = true,
                 playerProgress = true,
                 playerTimer = true,
                 progress = true, -- Duplicate?
@@ -871,12 +866,8 @@ function WheelchairLevel.Config:GetDefaults()
                 tooltip = {
                     showDetails = true,
                     showExperience = true,
-                    showBGInfo = true,
                     showDungeonInfo = true,
                     showTimerInfo = true,
-                    showGatheringInfo = true,
-                    showArchaeologyInfo = true,
-                    showGuildInfo = true
                 }
             },
             timer = {

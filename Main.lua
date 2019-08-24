@@ -691,12 +691,15 @@ function WheelchairLevel:OnSlashCommand(arg1)
             WheelchairLevel.Messages:Print("Error: No dungeon currently in progress",{1,0,0},WheelchairLevel.Messages.printStyle.red,5)
         end
     elseif arg1 == "sd" then
+        local inInstance, type = IsInInstance()
         if WheelchairLevel.Player:IsDungeonInProgress() then
             WheelchairLevel.Messages:Print("Error: Dungeon currently in progress",{1,0,0},WheelchairLevel.Messages.printStyle.red,5)
-        else
+        elseif inInstance and type == "party" then
             WheelchairLevel.Player:DungeonStart()
             WheelchairLevel.Messages:Print("Player dungeon manually started.")
             WheelchairLevel.Average:Update()
+        else
+            WheelchairLevel.Messages:Print("Error: Not in a party instance",{1,0,0},WheelchairLevel.Messages.printStyle.red,5)
         end
 
     elseif arg1 == "dlist" then
