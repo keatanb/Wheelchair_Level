@@ -10,9 +10,6 @@
 ## SavedVariables: WheelchairLevelDB
 ## SavedVariablesPerCharacter: sConfig,sData
 
-
-embeds.xml
-
 locale\locale.xml
 
 Main.lua
@@ -21,11 +18,9 @@ Libs.lua
 Config.lua
 
 objects\Messages.lua
-objects\LDB.lua
 objects\Tooltip.lua
 objects\Average.lua
 objects\Player.lua
 
 frames\GlobalTemplates.xml
 frames\AverageFrame_Classic.xml
-frames\AverageFrame_Blocky.xml
