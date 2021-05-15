@@ -26,7 +26,7 @@ WheelchairLevel.AverageFrameAPI["Classic"] =
     Initialize = function(self)
         if WheelchairLevel_AverageFrame_Classic ~= nil then
             self.window = WheelchairLevel_AverageFrame_Classic
-            self.backdrop = self.window:GetBackdrop();
+            --self.backdrop = self.window:GetBackdrop();
             self:CreateLines()
             self:Update()
             -- self.window:SetScript("OnEnter", function() self:ShowTooltip() end)
@@ -119,11 +119,11 @@ WheelchairLevel.AverageFrameAPI["Classic"] =
             
             -- Show or hide the backrop
             if WheelchairLevel.db.profile.averageDisplay.backdrop then
-                self.window:SetBackdrop(self.backdrop);
-                self.window:SetBackdropColor("0.0", "0.75", "0.5", "0.75");
-                self.window:SetBackdropBorderColor("0.0", "0.0", "0.0", "1.0");
+                --self.window:SetBackdrop(self.backdrop);
+                --self.window:SetBackdropColor("0.0", "0.75", "0.5", "0.75");
+                --self.window:SetBackdropBorderColor("0.0", "0.0", "0.0", "1.0");
             else
-                self.window:SetBackdrop(nil);
+                --self.window:SetBackdrop(nil);
             end
             
             self:UpdateLineVisibility()
