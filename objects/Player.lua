@@ -523,7 +523,7 @@ function WheelchairLevel.Player:DungeonStart()
         WheelchairLevel.db.char.data.dungeonList[1].level = self.level
         WheelchairLevel.db.char.data.dungeonList[1].startTime = time()
         local hours, mins = GetGameTime();
-        local dateInfo = C_Calendar.GetDate();
+        local dateInfo = C_DateAndTime.GetCurrentCalendarTime();
         WheelchairLevel.db.char.data.dungeonList[1].timeStamp = string.format("%02d",dateInfo.monthDay) .."-"..string.format("%02d",dateInfo.month).."-"..dateInfo.year.." "..string.format("%02d",hours)..":"..string.format("%02d",mins)
         console:log("Dungeon Started! (" .. tostring(WheelchairLevel.db.char.data.dungeonList[1].name) .. ")")
         return true
