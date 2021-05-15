@@ -1,9 +1,9 @@
-## Interface: 11302
+## Interface: 20501
 ## Title: Wheelchair |cff9966ff[Level]
 ## Author: Keatan Bauer
-## Version: 1.13.2
+## Version: 2.0.501_1
 ## Notes: Shows mobs, quests, dungeons and battles needed until you reach your next level.
-## URL: http://github.com
+## URL: https://github.com/keatanb/Wheelchair_Level/tree/classic-tbc
 ## OptionalDeps: LibStub,CallbackHandler-1.0,AceTimer-3.0,AceConfig-3.0,AceGUI-3.0,AceDB-3.0,AceDBOptions-3.0
 ## DefaultState: Enabled
 ## LoadOnDemand: 0

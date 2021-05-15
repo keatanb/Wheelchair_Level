@@ -8,8 +8,8 @@ local L = addonTable.GetLocale()
 
 -- Create the Main WheelchairLevel object and the main frame (used to listen to events.)
 WheelchairLevel = {}
-WheelchairLevel.version = "1.13.2_1"
-WheelchairLevel.releaseDate = "2019-08-18T05:27:39Z"
+WheelchairLevel.version = "2.0.501_1"
+WheelchairLevel.releaseDate = "2021-05-15T19:27:39Z"
 
 WheelchairLevel.frame = CreateFrame("FRAME", "WheelchairLevel", UIParent)
 WheelchairLevel.frame:RegisterEvent("PLAYER_LOGIN")
@@ -682,7 +682,7 @@ function WheelchairLevel:OnSlashCommand(arg1)
         WheelchairLevel.Player:ClearDungeonList()
         WheelchairLevel.Messages:Print("Player dungeon records cleared.")
         WheelchairLevel.Average:Update()
-    elseif arg1 == "fd" or arg1 == "ed" then
+    elseif arg1 == "fd" or arg1 == "ed" or arg1 == "end dungeon" then
         if WheelchairLevel.Player:IsDungeonInProgress() then
             WheelchairLevel.Player:DungeonEnd()
             WheelchairLevel.Messages:Print("Player dungeon manually finished.")
@@ -690,7 +690,7 @@ function WheelchairLevel:OnSlashCommand(arg1)
         else
             WheelchairLevel.Messages:Print("Error: No dungeon currently in progress",{1,0,0},WheelchairLevel.Messages.printStyle.red,5)
         end
-    elseif arg1 == "sd" then
+    elseif arg1 == "sd" or arg1 = "start dungeon" then
         local inInstance, type = IsInInstance()
         if WheelchairLevel.Player:IsDungeonInProgress() then
             WheelchairLevel.Messages:Print("Error: Dungeon currently in progress",{1,0,0},WheelchairLevel.Messages.printStyle.red,5)
@@ -702,7 +702,7 @@ function WheelchairLevel:OnSlashCommand(arg1)
             WheelchairLevel.Messages:Print("Error: Not in a party instance",{1,0,0},WheelchairLevel.Messages.printStyle.red,5)
         end
 
-    elseif arg1 == "dlist" then
+    elseif arg1 == "dlist" or arg1 == "dungeon list" then
         console:log("-- Dungeon list--")
         for index, data in ipairs(WheelchairLevel.db.char.data.dungeonList) do
             console:log("#" .. tostring(index))
