@@ -81,7 +81,7 @@ function WheelchairLevel.Config:Initialize()
             WheelchairLevel.db.char.data.timer.start = GetTime()
             WheelchairLevel.db.char.data.timer.total = 0
             WheelchairLevel.Average:UpdateTimer()
-            WheelchairLevel.LDB:UpdateTimer()
+            --WheelchairLevel.LDB:UpdateTimer()
         end,
         timeout = 0,
         whileDead = true,
@@ -779,7 +779,7 @@ function WheelchairLevel.Config:SetTimerEnabled(info, value)
         WheelchairLevel.timer:CancelTimer(WheelchairLevel.Player.timerHandler)
     end
     WheelchairLevel.Average:UpdateTimer(nil)
-    WheelchairLevel.LDB:UpdateTimer()
+    --WheelchairLevel.LDB:UpdateTimer()
 end
 -- ----------------------------------------------------------------------------
 -- Default config values.
