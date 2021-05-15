@@ -690,7 +690,7 @@ function WheelchairLevel:OnSlashCommand(arg1)
         else
             WheelchairLevel.Messages:Print("Error: No dungeon currently in progress",{1,0,0},WheelchairLevel.Messages.printStyle.red,5)
         end
-    elseif arg1 == "sd" or arg1 = "start dungeon" then
+    elseif arg1 == "sd" or arg1 == "start dungeon" then
         local inInstance, type = IsInInstance()
         if WheelchairLevel.Player:IsDungeonInProgress() then
             WheelchairLevel.Messages:Print("Error: Dungeon currently in progress",{1,0,0},WheelchairLevel.Messages.printStyle.red,5)
